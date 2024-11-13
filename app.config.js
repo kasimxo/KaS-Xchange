@@ -4,6 +4,7 @@ export default {
     expo: {
         name: "Xchange",
         slug: "Xchange",
+        scheme: "kas-xchange",
         version: "1.0.0",
         orientation: "portrait",
         icon: "./assets/icon.png",
@@ -23,7 +24,8 @@ export default {
             }
         },
         web: {
-            favicon: "./assets/favicon.png"
+            favicon: "./assets/favicon.png",
+            bundler: "metro"
         },
         plugins: [
             "expo-router"
