@@ -29,7 +29,10 @@ export default function Index() {
 const estilosIndex = StyleSheet.create({
     container: {
         flex: 1,
-        gap: 5
+        gap: 5,
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center'
     },
     sections: {
         backgroundColor: '#84ba93',

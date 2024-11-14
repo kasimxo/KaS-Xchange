@@ -1,0 +1,50 @@
+[
+    {
+        "key": "USD",
+        "value": "USD - Dólar americano"
+    },
+    {
+        "key": "EUR",
+        "value": "EUR - Euro"
+    },
+    {
+        "key": "GBP",
+        "value": "GBP - Libra esterlina"
+    },
+    {
+        "key": "CHF",
+        "value": "CHF - Franco suizo"
+    },
+    {
+        "key": "JPY",
+        "value": "JPY - Yen japonés"
+    },
+    {
+        "key": "HKD",
+        "value": "HKD - Dólar hongkonés"
+    },
+    {
+        "key": "CAD",
+        "value": "CAD - Dólar canadiense"
+    },
+    {
+        "key": "CNY",
+        "value": "CNY - Yuan chino"
+    },
+    {
+        "key": "AUD",
+        "value": "AUD - Dólar australiano"
+    },
+    {
+        "key": "BRL",
+        "value": "BRL - Real brasileño"
+    },
+    {
+        "key": "RUB",
+        "value": "RUB - Rublo ruso"
+    },
+    {
+        "key": "MXN",
+        "value": "MXN - Peso mexicano"
+    }
+]
