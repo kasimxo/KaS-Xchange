@@ -1,12 +1,42 @@
 import { View, Text, FlatList, TextInput, StyleSheet } from 'react-native'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SelectList } from 'react-native-dropdown-select-list'
+import { CurrencyRatesGET } from '../../api/Exhange-api';
 
 const DATA = require('./../../static/currencies.json')
 
 export default function Conversor() {
     const [currency, setCurrency] = useState();
     const [amount, setAmount] = useState(1);
+    const [ratesOrg, setRatesOrg] = useState()
+    const [rates, setRates] = useState();
+
+    useEffect(() => {
+        if (rates === undefined || rates === null) {
+
+            loadRates()
+        }
+    }, [rates])
+
+    async function loadRates() {
+        let dataRates = await CurrencyRatesGET()
+        console.log(dataRates)
+        setRatesOrg(dataRates)
+        setRates(dataRates)
+    }
+
+    function changeAmount(text) {
+        setAmount(text)
+        if (Number.isNaN(Number.parseInt(text))) {
+            return
+        }
+        let calculateRates = []
+        ratesOrg.forEach((rate) => {
+            calculateRates.push({ id: rate.id, value: rate.value * Number.parseInt(text) })
+        })
+        setRates(calculateRates)
+    }
+
     return (
         <View style={estilosConversor.container}>
             <Text>Seleccionar moneda:</Text>
@@ -20,10 +50,15 @@ export default function Conversor() {
             <Text>Introducir cantidad:</Text>
             <TextInput
                 style={estilosConversor.input}
-                onChangeText={setAmount}
+                onChangeText={(text) => { changeAmount(text) }}
                 value={amount} />
             <Text>El equivalente de {amount} {currency} es:</Text>
 
+            <FlatList
+                data={rates}
+                renderItem={({ item }) => <Text>{item.id} {item.value}</Text>}
+                keyExtractor={item => item.id}
+            />
         </View>
     )
 }
