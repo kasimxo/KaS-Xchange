@@ -14,12 +14,13 @@ export default function Conversor() {
     useEffect(() => {
         if (rates === undefined || rates === null) {
 
-            loadRates()
+            loadRates('eur')
         }
     }, [rates])
 
-    async function loadRates() {
-        let dataRates = await CurrencyRatesGET()
+    async function loadRates(curr) {
+        setCurrency(curr)
+        let dataRates = await CurrencyRatesGET(curr.toLowerCase())
         console.log(dataRates)
         setRatesOrg(dataRates)
         setRates(dataRates)
@@ -41,7 +42,7 @@ export default function Conversor() {
         <View style={estilosConversor.container}>
             <Text>Seleccionar moneda:</Text>
             <SelectList
-                setSelected={(val) => setCurrency(val)}
+                setSelected={(val) => loadRates(val.split(' ')[0])}
                 data={DATA}
                 save="value"
                 defaultOption={{ key: 'EUR', value: 'EUR - Euro' }}
