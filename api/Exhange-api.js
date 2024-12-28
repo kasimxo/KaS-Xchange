@@ -38,7 +38,7 @@ export async function HistoricRatesGet(currOrigin, interval) {
                 rates.push({ id: obj.key, value: Number.parseFloat(data[currOrigin][obj.key.toLowerCase()]) })
 
             })
-            querys.push({ x: interval - i, order: interval - i, date: date.join('-'), rates: rates })
+            querys.push({ x: interval - i, order: interval - i, date: new Date(dateTS - (1000 * 3600 * 24 * i)), rates: rates })
         }
         querys.sort((a, b) => a.order - b.order)
         console.log(querys)

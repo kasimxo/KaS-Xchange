@@ -23,7 +23,12 @@ export default function Conversor() {
         let dataRates = await CurrencyRatesGET(curr.toLowerCase())
         console.log(dataRates)
         setRatesOrg(dataRates)
-        setRates(dataRates)
+
+        let calculateRates = []
+        dataRates.forEach((rate) => {
+            calculateRates.push({ id: rate.id, value: rate.value * Number.parseInt(amount) })
+        })
+        setRates(calculateRates)
     }
 
     function changeAmount(text) {
@@ -57,7 +62,7 @@ export default function Conversor() {
 
             <FlatList
                 data={rates}
-                renderItem={({ item }) => <Text>{item.id} {item.value}</Text>}
+                renderItem={({ item }) => <Text>{item.id} {item.value.toFixed(2)}</Text>}
                 keyExtractor={item => item.id}
             />
         </View>

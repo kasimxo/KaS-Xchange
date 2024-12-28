@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import { VictoryChart, VictoryLine, VictoryTheme } from 'victory'
+import { VictoryChart, VictoryLine, VictoryTheme, VictoryVoronoiContainer, VictoryTooltip } from 'victory'
 
 export default function Graph(props) {
     const data = props.data
@@ -7,13 +7,26 @@ export default function Graph(props) {
     console.log("Debug graph data ", data)
     return (
         <View>
-            <VictoryChart
-                theme={VictoryTheme.clean}
-            >
-                <VictoryLine
-                    data={data}
-                />
-            </VictoryChart>
+            {data !== undefined ?
+                <VictoryChart
+                    theme={VictoryTheme.clean}
+                    containerComponent={
+                        <VictoryVoronoiContainer
+                            voronoiDimension="x"
+                            labels={({ datum }) =>
+                                `${datum.y.toFixed(2)}\n${datum.x.toISOString().split('T')[0]}`
+                            }
+                            labelComponent={
+                                <VictoryTooltip />
+                            }
+                        />
+                    }
+                >
+                    <VictoryLine
+                        data={data}
+                    />
+                </VictoryChart>
+                : null}
 
         </View>
     )
