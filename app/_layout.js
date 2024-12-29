@@ -1,13 +1,10 @@
-import { Stack } from 'expo-router'
+import { Slot } from 'expo-router'
 import { NativeBaseProvider } from 'native-base'
 
 export default function Layout() {
     return (
         <NativeBaseProvider>
-
-            <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            </Stack>
+            <Slot />
         </NativeBaseProvider>
     )
 }
