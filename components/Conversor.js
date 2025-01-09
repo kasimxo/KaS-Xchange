@@ -4,6 +4,7 @@ import { SelectList } from 'react-native-dropdown-select-list'
 import { CurrencyRatesGET } from '../api/Exhange-api';
 import { VStack, Center, HStack } from 'native-base';
 import { ExangeContexto } from '../app';
+import { DropDownList } from './DropDownList';
 
 const DATA = require('./../static/currencies.json')
 
@@ -69,6 +70,7 @@ export default function Conversor() {
             backgroundColor={'coolGray.300'}
             padding={5}
             borderRadius={10}
+            zIndex={999}
         >
             <Center
                 h="auto"
@@ -76,20 +78,20 @@ export default function Conversor() {
                 bg="coolGray.100"
                 rounded="md"
                 padding={5}
-                shadow={3} >
+                shadow={3}
+                zIndex={300}
+            >
                 <Text>Seleccionar moneda origen:</Text>
-                <HStack>
+                <HStack
+                    justifyContent="space-between"
+                    height="auto"
+                    zIndex={300}
+                >
                     <TextInput
                         style={estilosConversor.input}
                         onChangeText={(text) => { changeamountOrigen(text) }}
                         value={amountOrigen} />
-                    <SelectList
-                        setSelected={(val) => setCurrOrigen(val.split(' ')[0].toLowerCase())}
-                        data={DATA}
-                        save="value"
-                        defaultOption={{ key: 'EUR', value: 'EUR - Euro' }}
-                        searchPlaceholder={'Buscar'}
-                    />
+                    <DropDownList data={DATA} />
                 </HStack>
             </Center>
             <Center
@@ -98,20 +100,17 @@ export default function Conversor() {
                 bg="coolGray.100"
                 rounded="md"
                 padding={5}
-                shadow={3} >
+                shadow={3}
+
+                zIndex={1}
+            >
                 <Text>Seleccionar moneda destino:</Text>
                 <HStack>
                     <TextInput
                         style={estilosConversor.input}
                         onChangeText={(text) => { changeamountDestiny(text) }}
                         value={amountDestiny} />
-                    <SelectList
-                        setSelected={(val) => setCurrDestiny(val.split(' ')[0])}
-                        data={DATA}
-                        save="value"
-                        defaultOption={{ key: 'USD', value: 'USD - Dólar americano' }}
-                        searchPlaceholder={'Buscar'}
-                    />
+                    <DropDownList data={DATA} />
                 </HStack>
             </Center>
         </VStack>
