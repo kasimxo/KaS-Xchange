@@ -1,4 +1,4 @@
-import { View, StyleSheet, Modal } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Box } from 'native-base'
 import { useRef, useState, useEffect, useContext } from 'react'
 import { SelectList } from 'react-native-dropdown-select-list'
@@ -6,7 +6,6 @@ import { ExangeContexto } from '../app';
 
 export function DropDownList(props) {
     let data = props.data
-    const [isVisible, setIsVisible] = useState(false);
 
     const { currOrigen, setCurrOrigen,
         currDestiny, setCurrDestiny
@@ -30,9 +29,8 @@ export function DropDownList(props) {
             height={height ? `${height}px` : 'auto'}
         >
             <View
-                ref={contentRef} // Referencia para medir el contenido
+                ref={contentRef}
                 onLayout={(event) => {
-                    // Asegura que capturamos la altura inicial
                     if (!height) {
                         const { height: measuredHeight } = event.nativeEvent.layout;
                         setHeight(measuredHeight);
@@ -54,14 +52,9 @@ export function DropDownList(props) {
 }
 
 const estilosDropDownList = StyleSheet.create({
-    centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     currList: {
         zIndex: 900, // works on ios
-        backgroundColor: "white",
+        backgroundColor: "#f3f4f6",
         elevation: 900, // works on android
     }
 })

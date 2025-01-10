@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import { useContext, useEffect, useState } from 'react'
 import { ExangeContexto } from '../app'
-import { HStack, Button } from 'native-base'
+import { HStack, Button, Box } from 'native-base'
 import { HistoricRatesGet } from './../api/Exhange-api'
 import { VictoryChart, VictoryLine, VictoryTheme, VictoryVoronoiContainer, VictoryTooltip } from 'victory'
 
@@ -17,10 +17,22 @@ export default function Graph() {
         let arr = await HistoricRatesGet(currOrigen, period)
         if (arr === undefined) { return }
         let processedRates = []
-        arr.forEach((obj) => {
+        console.log("ABOUT TO ITERATE: ", arr, arr.length, arr["0"])
+
+        for (let i = 0; i < arr.length; i++) {
+            let obj = arr[i]
+            console.log(obj)
             processedRates.push({ x: obj.date, y: obj.rates.find((el) => el.id === currDestiny).value })
-        })
+
+        }
+        /*
+                arr.forEach((obj) => {
+                    console.log("ARR RET OBJ ", obj)
+                    processedRates.push({ x: obj.date, y: obj.rates.find((el) => el.id === currDestiny).value })
+                })
+          */
         setRates(processedRates)
+        console.log("DONE ITERATING")
     }
 
     useEffect(() => {
@@ -29,12 +41,14 @@ export default function Graph() {
 
 
     return (
-        <View>
+        <Box
+            backgroundColor={'coolGray.300'}
+            borderRadius={10}
+            padding={5}
+        >
             <HStack
                 space={3}
                 justifyContent="center"
-                backgroundColor={'coolGray.300'}
-                padding={5}
                 borderRadius={10}
             >
                 <Button
@@ -72,6 +86,6 @@ export default function Graph() {
                     />
                 </VictoryChart>
                 : null}
-        </View>
+        </Box>
     )
 }

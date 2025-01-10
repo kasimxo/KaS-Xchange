@@ -1,8 +1,6 @@
-import { useEffect, useState, createContext } from 'react'
-import { View, Text, StyleSheet, TextInput } from 'react-native'
-import { HStack, Center, Container, Button, VStack } from 'native-base'
+import { useState, createContext } from 'react'
+import { HStack, VStack, Text, Heading } from 'native-base'
 import Graph from './../components/Graph'
-import { HistoricRatesGet } from '../api/Exhange-api'
 import Conversor from '../components/Conversor'
 
 const DATA = require('../static/currencies.json')
@@ -28,32 +26,33 @@ export const ExangeProvider = ({ children }) => {
 export default function Index() {
     return (
         <ExangeProvider>
-            <HStack
-                justifyContent={"center"}
-                space={20}
-                alignContent={"center"}
-                margin={50}
+            <VStack
+                padding={25}
             >
-                <Conversor />
-                <Graph />
-            </HStack>
+                <Heading
+                    size="xl"
+                    marginBottom={3}
+                >
+                    Xchange
+                </Heading>
+                <Text>
+                    Bienvenido a KaS-Xchange! <br />
+                    Un pequeño conversor de moneda construido con React Native para web y dispositivos Android.<br />
+                    Este proyecto ha sido creado con fines educativos y por tanto la información con respecto a los ratios de conversión
+                    puede no ser correcta.<br />
+                </Text>
+                <HStack
+                    justifyContent={"center"}
+                    space={20}
+                    alignContent={"center"}
+                    margin={50}
+                    bg="muted.100"
+                    size={"full"}
+                >
+                    <Conversor />
+                    <Graph />
+                </HStack>
+            </VStack>
         </ExangeProvider>
     )
 }
-
-const estilosHistorico = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignContent: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 10,
-
-    },
-    input: {
-        borderColor: 'gray',
-        borderRadius: 10,
-        padding: 10,
-        borderWidth: 1
-    }
-})
