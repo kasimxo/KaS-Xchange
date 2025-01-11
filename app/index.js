@@ -22,8 +22,6 @@ export const ExangeProvider = ({ children }) => {
         </ExangeContexto.Provider >
     )
 }
-
-
 export default function Index() {
     return (
         <ExangeProvider>

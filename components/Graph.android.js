@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import { useContext, useEffect, useState } from 'react'
 import { ExangeContexto } from '../app'
 import { HStack, Button, Box } from 'native-base'
@@ -27,14 +26,13 @@ export default function Graph() {
                     console.log("ARR RET OBJ ", obj)
                     processedRates.push({ x: obj.date, y: obj.rates.find((el) => el.id === currDestiny).value })
                 })
-          */
+        */
         setRates(processedRates)
     }
 
     useEffect(() => {
         recoverHistoricRates()
     }, [period, currOrigen, currDestiny])
-
 
     return (
         <Box
