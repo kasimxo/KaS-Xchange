@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { ExangeContexto } from '../app'
 import { HStack, Button, Box } from 'native-base'
 import { HistoricRatesGet } from './../api/Exhange-api'
-import { VictoryChart, VictoryLine, VictoryTheme, VictoryVoronoiContainer, VictoryTooltip } from 'victory'
+import { CartesianChart, Line } from "victory-native"
 
 export default function Graph() {
     const { currOrigen, setCurrOrigen,
@@ -21,7 +21,6 @@ export default function Graph() {
         for (let i = 0; i < arr.length; i++) {
             let obj = arr[i]
             processedRates.push({ x: obj.date, y: obj.rates.find((el) => el.id === currDestiny).value })
-
         }
         /*
                 arr.forEach((obj) => {
@@ -64,24 +63,17 @@ export default function Graph() {
                 </Button>
             </HStack>
             {rates !== undefined ?
-                <VictoryChart
-                    theme={VictoryTheme.clean}
-                    containerComponent={
-                        <VictoryVoronoiContainer
-                            voronoiDimension="x"
-                            labels={({ datum }) =>
-                                `${datum.y.toFixed(2)}\n${datum.x.toISOString().split('T')[0]}`
-                            }
-                            labelComponent={
-                                <VictoryTooltip />
-                            }
+                <CartesianChart data={rates} xKey="x" yKeys={["y"]}>
+                    {({ points }) => (
+                        //👇 pass a PointsArray to the Line component, as well as options.
+                        <Line
+                            points={points.y}
+                            color="red"
+                            strokeWidth={3}
+                            animate={{ type: "timing", duration: 300 }}
                         />
-                    }
-                >
-                    <VictoryLine
-                        data={rates}
-                    />
-                </VictoryChart>
+                    )}
+                </CartesianChart>
                 : null}
         </Box>
     )
