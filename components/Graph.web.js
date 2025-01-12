@@ -14,26 +14,17 @@ export default function Graph() {
     const [rates, setRates] = useState()
 
     async function recoverHistoricRates() {
-        let arr = await HistoricRatesGet(currOrigen, period)
-        if (arr === undefined) { return }
-        let processedRates = []
-
-        for (let i = 0; i < arr.length; i++) {
-            let obj = arr[i]
-            processedRates.push({ x: obj.date, y: obj.rates.find((el) => el.id === currDestiny).value })
-
-        }
-        /*
-                arr.forEach((obj) => {
-                    console.log("ARR RET OBJ ", obj)
-                    processedRates.push({ x: obj.date, y: obj.rates.find((el) => el.id === currDestiny).value })
-                })
-          */
-        setRates(processedRates)
+        return HistoricRatesGet(currOrigen, period)
+            .then((data) => data
+                .map(({date, rates}) => ({
+                    x: date,
+                    y: rates.find((el) => el.id === currDestiny).value
+                }))
+            )
     }
 
     useEffect(() => {
-        recoverHistoricRates()
+        recoverHistoricRates().then(setRates)
     }, [period, currOrigen, currDestiny])
 
 
