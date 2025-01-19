@@ -26,14 +26,13 @@ export default function Conversor() {
     async function loadRates(curr) {
         setCurrOrigen(curr)
         let dataRates = await CurrencyRatesGET(curr.toLowerCase())
-        console.log(dataRates)
+
         setRatesOrg(dataRates)
 
         let calculateRates = []
         dataRates.forEach((rate) => {
             calculateRates.push({ id: rate.id, value: rate.value * Number.parseFloat(amountOrigen), ratio: rate.value })
         })
-        console.log("Calculate Rates", calculateRates)
         setRates(calculateRates)
         let destinyAmount = calculateRates.find((el) => el.id === currDestiny).value
         setAmountDestiny(destinyAmount)
@@ -59,7 +58,6 @@ export default function Conversor() {
             return
         }
         let amountOrg = Number.parseFloat(text) / rates.find((el) => el.id === currDestiny).ratio
-        console.log("IS NAN ", amountOrg, Number.parseFloat(text), rates.find((el) => el.id === currDestiny))
         setAmountOrigen(amountOrg)
     }
 
@@ -86,6 +84,7 @@ export default function Conversor() {
                     justifyContent="space-between"
                     height="auto"
                     zIndex={300}
+                    space={2}
                 >
                     <TextInput
                         style={estilosConversor.input}
@@ -101,11 +100,12 @@ export default function Conversor() {
                 rounded="md"
                 padding={5}
                 shadow={3}
-
                 zIndex={1}
             >
                 <Text>Seleccionar moneda destino:</Text>
-                <HStack>
+                <HStack
+                    space={2}
+                >
                     <TextInput
                         style={estilosConversor.input}
                         onChangeText={(text) => { changeamountDestiny(text) }}
@@ -114,7 +114,6 @@ export default function Conversor() {
                 </HStack>
             </Center>
         </VStack>
-
     )
 }
 

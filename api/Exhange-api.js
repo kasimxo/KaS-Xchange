@@ -5,8 +5,8 @@ export async function CurrencyRatesGET(curr) {
     return fetch(URL)
         .then((dataRaw) => dataRaw.json())
         .then((data) => DATA
-            .filter(({key}) => key.localeCompare(curr.toUpperCase()) !== 0)
-            .map(({key}) => ({
+            .filter(({ key }) => key.localeCompare(curr.toUpperCase()) !== 0)
+            .map(({ key }) => ({
                 id: key,
                 value: Number.parseFloat(data[curr][key.toLowerCase()])
             }))
@@ -25,11 +25,10 @@ export async function HistoricRatesGet(currOrigin, interval) {
         .map((url, i) => fetch(url)
             .then((response) => response.json())
             .then((daily) => {
-                const rates = DATA.map(({key}) => ({
+                const rates = DATA.map(({ key }) => ({
                     id: key,
                     value: Number.parseFloat(daily[currOrigin][key.toLowerCase()]),
                 }))
-                
                 return {
                     x: interval - i,
                     date: new Date(dateTS - (1000 * 3600 * 24 * i)),
