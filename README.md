@@ -55,5 +55,5 @@ Las contribuciones son bienvenidas. Si quieres contribuir, sigue los siguientes 
 1. Haz un fork del repositorio
 2. Crea una rama nueva para tu funcionalidad (git checkout -b nombre-de-rama)
 3. Haz un commit de tus cambios (git commit -m "Mensaje")
-4. Haz un push a la rama (git push origin feature/nueva-funcionalidad)
+4. Haz un push a la rama (git push origin nombre-de-rama)
 5. Abre un Pull Request
