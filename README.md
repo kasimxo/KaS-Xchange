@@ -4,6 +4,10 @@
 Xchange es un pequeño conversor de moneda multiplataforma (tanto para web como para Android) creado con fines educativos. 
 
 Además de permitir la conversión de x cantidad de una moneda a otra, muestra un histórico de datos (los últimos 7 o 30 días).
+<p align="center" width="100%">
+    <img width="524" alt="kas-xchange-photoweb" src="https://github.com/user-attachments/assets/8014046d-d94d-4518-87a1-49a363c39175" />
+  <br>Versión web
+</p>
 
 > [!WARNING]
 > Los datos de conversión que aparecen pueden no coincidir con la realidad.
