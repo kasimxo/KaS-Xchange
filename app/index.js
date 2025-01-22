@@ -27,6 +27,8 @@ export default function Index() {
         <ExangeProvider>
             <VStack
                 padding={25}
+                width={"50%"}
+                margin={"auto"}
             >
                 <Heading
                     size="xl"
